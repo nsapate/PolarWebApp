@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>NASA - Ice Sheet Analytics</title>
+	<script type="text/javascript" src="scripts/jsonData.js"></script>
+	<script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="scripts/loader.js"></script>
+		<script type="text/javascript" src="scripts/script_2.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="styles/reset.css" />
+	<link rel="stylesheet" type="text/css" href="styles/style.css" />
+	<link rel="stylesheet" type="text/css" href="styles/jquery-ui.css" />
+	
+	<link rel="shortcut icon" href="images/nasa-icon.png" type="image/x-icon">
+</head>
+<body>
+	<div class="main-container">
+		<div class="header-area">
+			<div class="app-icon"></div>
+			<div class="title-container">
+				<p>ICE SHEET Predictive Analytics</p>
+			</div>
+		</div>
+		<div class="content-area">
+			<div class="login-register-tabbed-area">
+
+				<!-- Tabs Container -->
+				<ul class="tabs-container" id="tabs">
+					<li>
+						<a target="_self" href="index.html" data-content-ref="login" class="tab-login-link tab-link">
+							<img src="images/icon-history-search.png">
+							<span>HISTORICAL DATA</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="history-info">&#9432;</span>
+						</a>
+					</li>
+					<li>
+						<a data-content-ref="register" class="tab-register-link tab-link">
+							<img src="images/icon-prediction.png">
+							<span>ICE SHEET PREDICTION</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="predict-info">&#9432;</span>
+						</a>
+					</li>
+					<li>
+						<a target="_self" href="modify.html" data-content-ref="attrcust" class="tab-register-link tab-link">
+							<img src="images/icon-customattr.png">
+							<span>MODIFY MODEL</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="model-info">&#9432;</span>
+						</a>
+					</li>
+				</ul>
+				
+				<!-- Content for Tabs -->
+				<div class="tabContent" id="login">
+					
+				</div>
+				<div class="tabContent" id="register">
+					
+					<div class="tab1-region tab-row">
+						<p class="label-text">Select Temperature variations</p>
+						<div class="temp-container">
+							<select id="temperatureLevel" class="temp-field">
+								<option disabled>--Select--</option>
+								<option value="10" selected>Increases by 10%</option>
+								<option value="50">Increases by 50%</option>
+								<option value="-10">Decreases by 10%</option>
+								<option value="-50">Decreases by 50%</option>
+							</select>
+						</div>
+					</div>
+					<div class="tab1-region tab-row">
+						<p class="label-text">Select Wind Speed variations</p>
+						<div class="temp-container">
+							<select id="windSpeedLevel" class="ws-field">
+								<option disabled>--Select--</option>
+								<option value="10" selected>Increases by 10%</option>
+								<option value="50">Increases by 50%</option>
+								<option value="-10">Decreases by 10%</option>
+								<option value="-50">Decreases by 50%</option>
+							</select>
+						</div>
+					</div>
+					<div class="tab1-region tab-row">
+						<p class="label-text">Select CO<sub>2</sub> level variations</p>
+						<div class="temp-container">
+							<select id="coLevel" class="co-field">
+								<option disabled>--Select--</option>
+								<option value="10" selected>Increases by 10%</option>
+								<option value="50">Increases by 50%</option>
+								<option value="-10">Decreases by 10%</option>
+								<option value="-50">Decreases by 50%</option>
+							</select>
+						</div>
+					</div>
+					<div class="tab1-region tab-row">
+						<div class="temp-container">
+							<button id="predict" onclick="predictIceMelt()">Predict</button>
+						</div>
+					</div>
+					<!-- <div class="tab1-timeline tab-row">
+						<p class="label-text">TEMPERATURE(DegCelcius)</p>
+						<div class="timeline-scroller-container">
+							<p id="tempTextMin"></p>
+							<div id="slider-range_2" class="slider-range-field"></div>
+							<p id="tempTextMax"></p>
+						</div>
+					</div>
+					<div class="tab1-timeline tab-row">
+						<p class="label-text">CO2 LEVEL(ppm)</p>
+						<div class="timeline-scroller-container">
+							<p id="co2TextMin"></p>
+							<div id="slider-range_1" class="slider-range-field"></div>
+							<p id="co2TextMax"></p>
+						</div>
+					</div> -->
+					
+					<div id="map" style="margin-top:2em;"></div>
+					<div id="slider" style="visibility:hidden;">
+						2001<input type="range" name="timeline" id="time-line" value="2001" min="2001" max="2016" step="3" onchange="showVal(this.value)">2016   
+				   </div>
+   
+				</div>
+				<div class="tabContent" id="attrcust">
+				
+				</div>
+				<div id="dialog" style="display: none" align = "center">
+    				<span></span>
+    				<img id="bigpic" src="bigpic" style="display:none;" />
+				</div>
+			</div>
+		</div>
+		<!-- <div class="footer-area">
+		
+		</div> -->
+	</div>
+	
+</body>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALCMVxJ28kp6CxoJuX0Nytuli-mf69LVc&callback=initMap"></script>
+<script>
+		$(document).ready(function(){
+			//setInterval(function(){$(document).find('defs').next().children('g:eq(1)').hide();},100);
+			$("#time-line").trigger('change');
+			$("#dialog").dialog({
+			       modal: true,
+			       autoOpen: false,
+			       title: "Message",
+			       width: 400,
+			       height: 150
+			   });
+		});  
+   </script>
+<script>
+		
+		
+		function initMap(locationArray) {
+    	 /*  if(thickness == undefined && elevation == undefined){
+  			thickness = 100;
+  			elevation = 1000;
+  		} */
+  		
+  		if(locationArray != undefined)
+  		{
+  			var map = new google.maps.Map(document.getElementById('map'), {
+    	          zoom: 2,
+    	          center: {lat: 70, lng : -45}
+    	          //mapTypeId: 'satellite'
+    	        });
+  			
+  			for(var i=0;i<locationArray.length;i++)
+      	  {/* 
+
+      	        var contentString = '<b>Thickness : </b>&nbsp;'+locationArray[i].thickness;
+
+      	        var iconPath = "";
+      	        if(locationArray[i].thickness <= 500)
+      	        	iconPath = "mark_1.png";
+      	        else if(locationArray[i].thickness >= 2000)
+      	        	iconPath = "mark_3.png";
+      	        else
+      	        	iconPath = "mark_2.png";
+      	        
+      	        var iconbase = {
+      	        		url : iconPath,
+      	        		scaledSize: new google.maps.Size(25, 25)
+      	        }
+
+      	        //var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+      	        
+      	       
+      	        	var infowindow = new google.maps.InfoWindow({
+            	          content: contentString
+            	        });
+      	        	var marker = new google.maps.Marker({
+            	          position: {lat: locationArray[i].lat, lng : locationArray[i].lng},
+            	          map: map,
+            	          title: 'GreenLand Coverage',
+            	          icon : iconbase
+            	        });
+            	        
+            	        //markerArray.push(marker);
+            	        marker.addListener('click', (function() {
+            	        	infowindow.open(map, marker);
+            	        }()));
+      	   */}
+  		}
+    	  
+    	  
+        //var uluru = {lat: 75.76892, lng: -44.1491};
+        
+        
+      }
+	
+		function showVal(currVal){
+		
+			locationArray = [{lat: 75.76892, lng: -44.1491, thickness : 100, elevation : 1000},
+		                     {lat: 79.76892, lng: -43.1491, thickness : 2500, elevation : 600},
+		                     {lat: 72.76892, lng: -41.1491, thickness : 600, elevation : 300}];
+
+		//initMap(80,800,locationArray);
+		
+		 switch(currVal)
+		{
+			case "2001" : initMap(locationArray);break;
+			
+			case "2004" : initMap(locationArray);break;
+			
+			case "2007" : initMap(locationArray);break;
+			
+			case "2010" : initMap(locationArray);break;
+			
+			case "2013" : initMap(locationArray);break;
+			
+			case "2016" : initMap(locationArray);break;
+			
+			default : break;
+		}
+	}
+		
+		function predictIceMelt()
+		{
+			var tempLevel = $("select#temperatureLevel option:selected").val();
+			var wsLevel = $("select#windSpeedLevel option:selected").val();
+			var coLevel = $("select#coLevel option:selected").val();
+			
+			validatePredictionModel(tempLevel,wsLevel,coLevel);
+		}
+		
+		function validatePredictionModel(tempLevel,wsLevel,coLevel)
+		{
+			var msg = "";
+			if(tempLevel > 0) {
+				if(coLevel > 0) {
+					msg = "Both temperature and CO2 levels are increasing. Save the planet.";
+					// Both High case
+				}
+				else {
+					msg = "CO2 Levels are controlled. Great !. Time to control Temperature.";
+					// Temp High case
+				}
+			}
+			else {
+				if(coLevel > 0) {
+					msg = "Temperature Levels are controlled. Great !. Time to control CO2 level.";
+					//CO High case
+				}
+				else {
+					msg = "Both temperature and CO2 levels have come down. Great Work Folks !!!";
+					// Both Low case
+				}
+			}
+			
+			if(wsLevel > 0) {
+				msg = "Wind Speed has increased (Uncontrollable). "+msg;
+			}
+			else {
+				msg = "Wind Speed has decreased (Uncontrollable). "+msg;
+			}
+			
+			       $('#dialog').dialog('open');
+			       $("#dialog span").text(msg);
+			      /*  var pic = "http://img.tesco.com/Groceries/pi/118/5000175411118/IDShot_90x90.jpg"
+			           $("#dialog img").src = pic;
+			       	   $("#dialog img").style.display='block'; */
+			       $("button.ui-dialog-titlebar-close").css("margin-right","50px");
+		}
+	
+</script>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  <link rel="stylesheet" type="text/css" href="theme.css">
+  <link rel="stylesheet" type="text/css" href="slider.css">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+  <body>
+  <div id="WorldMap">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+       <div id="regions_div" style="width: 900px; height: 500px;"></div>
+   <script type="text/javascript" >
+   var myMapsApiKey = 'AIzaSyALCMVxJ28kp6CxoJuX0Nytuli-mf69LVc';
+   google.charts.load('current', {'packages':['geochart'], mapsApiKey: myMapsApiKey});
+   google.charts.setOnLoadCallback(drawRegionsMap);
+
+   function drawRegionsMap(thickness, elevation, color) {
+		if(thickness == undefined && elevation == undefined && color == undefined){
+			thickness = 100;
+			elevation = 1000;
+			color = "#091F92";
+		}
+     var data = google.visualization.arrayToDataTable([
+       ['Country', 'Thickness', 'Elevation'],
+       
+       ['Green land', thickness, elevation]
+     ]);
+
+     var options = {colorAxis: {colors: [color]}};
+
+     var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+     chart.draw(data, options);
+     //setTimeout(function(){ $(document).find('defs').next().children('g:eq(1)').hide(); }, 5);
+     //alert(document.getElementById('defs'));
+     clearInterval();
+   }
+   </script>
+   <div id="slider">
+		2001<input type="range" name="timeline" id="time-line" value="2001" min="2001" max="2016" step="3" onchange="showVal(this.value)">2016   
+   </div>
+   <div class="toplevel"><canvas id="myCanvas" width="15" height="15" style="border:1px solid #d3d3d3;"></canvas>&nbsp;High Ice Density (2001)</div><br/>
+<div class="toplevel2"><canvas id="myCanvas2" width="15" height="15" style="border:1px solid #d3d3d3;"></canvas>&nbsp;Low Ice Density (2016)</div>
+
+   <script>
+		$(document).ready(function(){
+			setInterval(function(){$(document).find('defs').next().children('g:eq(1)').hide();},100);
+		});  
+   </script>
+   <script>
+	function showVal(currVal){
+		
+		switch(currVal)
+		{
+			case "2001" : google.charts.setOnLoadCallback(drawRegionsMap(100,1000,"#091F92"));break;
+			
+			case "2004" : google.charts.setOnLoadCallback(drawRegionsMap(80,800,"#273BE2"));break;
+			
+			case "2007" : google.charts.setOnLoadCallback(drawRegionsMap(60,600,"#4876FF"));break;
+			
+			case "2010" : google.charts.setOnLoadCallback(drawRegionsMap(40,400,"#3C9BED"));break;
+			
+			case "2013" : google.charts.setOnLoadCallback(drawRegionsMap(20,200,"#0BB5FF"));break;
+			
+			case "2016" : google.charts.setOnLoadCallback(drawRegionsMap(10,100,"#9BDDFF"));break;
+			
+			default : google.charts.setOnLoadCallback(drawRegionsMap(50,70,"#000000"));break;
+		}
+	};
+	
+   </script>
+   <script>
+   var c = document.getElementById("myCanvas");
+   var ctx = c.getContext("2d");
+
+   ctx.beginPath();
+   ctx.rect(0, 0, 15, 15);
+   ctx.fillStyle = "#091F92";
+   ctx.fill(); 
+   
+   var c2 = document.getElementById("myCanvas2");
+   var ctx2 = c2.getContext("2d");
+
+   ctx2.beginPath();
+   ctx2.rect(0, 0, 15, 15);
+   ctx2.fillStyle = "#9BDDFF";
+   ctx2.fill(); 
+   </script>
+   </div>
+  </body>
+  </head>
+</html>

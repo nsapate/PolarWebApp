@@ -1,0 +1,439 @@
+/* Always set the map height explicitly to define the size of the div
+* element that contains the map. */
+#map {
+height: 80%;
+}
+
+div.tab1-world-map
+{
+	/* border: 2px solid red; */
+	/* margin: 5px; */
+}
+
+.ui-slider .ui-slider-handle
+{
+	/* left:-1.6em; */
+	/* text-decoration:none; */
+	/* text-align:center; */
+	
+	/* line-height: 20px; */
+    /* width: 60px !IMPORTANT; */
+}
+
+div.tab1-timeline
+{
+	line-height: 100px;
+}
+
+div.tab1-region
+{
+	line-height: 50px;
+}
+
+div.tab1-map-area
+{
+	line-height: 50px;
+}
+
+div.tab-row p
+{
+	font-size: 24px;
+    font-weight: 600;
+    color: #424242;
+    width: 30%;
+	display: inline-block;
+}
+
+div.temp-container
+{
+	display:inline-block;
+}
+
+div.temp-container select
+{
+	font-size: 22px;
+    padding: 10px;
+    line-height: 50px;
+    color: grey;
+}
+
+div.tab1-timeline-slider
+{
+	width: 50%;
+    display: inline-block;
+}
+
+div.timeline-scroller-container
+{
+	display: inline-block;
+    width: 60%;
+}
+
+div.slider-range-field
+{
+	display: inline-block;
+    width: 70%;
+}
+
+div.timeline-scroller-container p
+{
+	width: 10%;
+    margin-left: 1em;
+    font-size: 22px;
+    color: darkslategrey;
+}
+
+div.tab1-map-area
+{
+	/* border: 2px solid green; */
+}
+
+div.map-container
+{
+	border: 1px solid #dcdcdc;
+	box-shadow: 0px 0px 4px 1px grey;
+}
+
+div.footer-area
+{
+	width:80%;
+	margin:0 auto;
+	background-color:#112e38;
+	height:41px;
+}
+
+body
+{
+	background-color:#FBFBFB;
+	font-family:'Segoe UI', helvetica, arial, sans-serif;
+}
+
+div.main-container
+{
+	/* border:2px solid red; */
+}
+
+div.app-icon
+{
+	height: 100px;
+    width: 120px;
+    background-size: 100% 100%;
+    background-image: url(../images/nasa-icon.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+	display:inline-block;
+}
+
+div.header-area
+{
+	max-width: 100%;
+	margin: 0 auto;
+	background-color: #112e38;
+}
+
+div.title-container
+{
+	display: inline-block;
+    height: 100px;
+    line-height: 100px;
+    vertical-align: top;
+}
+
+div.title-container p
+{
+	color: whitesmoke;
+    font-size: 40px;
+}
+
+.login-register-tabbed-area
+{
+	max-width: 100%;
+	margin: 0 auto;
+	/* width: 600px; */
+}
+
+ul#tabs
+{ 
+	list-style-type: none;
+	height: 60px;
+}
+
+ul#tabs li
+{ 
+	float: left;
+	box-sizing: border-box;
+	text-align:center;
+	line-height:60px;
+	height:60px;
+}
+
+ul#tabs li a
+{ 
+	color: #42454a;
+	background-color: #dedbde;
+	text-decoration: none;
+	display: block;
+	box-sizing: border-box;
+	cursor: pointer;
+	opacity: 0.7;
+	border: 1px solid #c9c3ba;
+	border-bottom: none;
+}
+
+ul#tabs li a:hover
+{ 
+	font-weight:700;
+}
+
+ul#tabs li a.selected
+{ 
+	color: #000;
+	background-color: #f1f0ee;
+	font-weight: 700;
+	cursor: default;
+	opacity: 1.0;
+}
+
+ul#tabs li a.tab-link img
+{
+	width:40px;
+	height:40px;
+	vertical-align:middle;
+}
+		
+ul#tabs li a span
+{
+	vertical-align:middle;
+}
+
+div.tabContent
+{
+	border: 1px solid #c9c3ba;
+	border-top: none;
+	padding: 2em 4em;
+	background-color: #f1f0ee;
+	border-radius: 0 0 6px 6px;
+	height:500px;
+	overflow-x:hidden;
+	overflow-y:scroll;
+}
+
+div.tabContent.hide
+{
+	display: none;
+}
+
+.login-form-row
+{
+	width: 75%;
+	margin: 0 auto;
+	overflow: hidden;
+	box-sizing: border-box;
+	margin-bottom: 15px;
+}
+
+div.imageInputWrapper
+{
+	border: 1px solid #aaa;
+}
+
+div.imageInputWrapper input.image-input-field
+{
+	width: 80%;
+	border: none;
+	outline: none;
+	padding: 5px 8px;
+	float: left;
+	box-sizing: border-box;
+	line-height: 35px;
+	height: 50px;
+	font-size: 22px;
+	color: #555;
+}
+
+div.imageInputWrapper div.input-icon-div
+{
+	width: 20%;
+	height: 50px;
+	line-height: 50px;
+	float: left;
+	box-sizing: border-box;
+	vertical-align: middle;
+	text-align: center;
+	background-color: #ddd;
+	border: 1px solid #ccc;
+}
+
+div.imageInputWrapper div.input-icon-div img
+{
+	width: 50%;
+	height: 65%;
+	vertical-align: middle;
+}
+
+/* Styling the Placeholder of Input fields */
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+	color: #ccc;
+	font-size: 18px;
+	
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color: #ccc;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color: #ccc;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: #ccc;
+}
+
+
+input[type="checkbox"].remember-me-chk-class
+{
+	margin-bottom:15px;
+}
+
+span.remember-me-text
+{
+	font-weight: 600;
+	color: #555;
+}
+
+a.forgot-pwd-link
+{
+	float: right;
+	color: #427fed;
+	font-weight:600;
+	text-decoration: none;
+}
+
+a.forgot-pwd-link:hover
+{
+	text-decoration:underline;
+}
+
+div.loginBtnWrapper
+{
+	margin-bottom:30px;
+}
+
+div.loginBtnWrapper a
+{
+	text-align: center;
+	display: block;
+	background-color: #2490C3;
+	border-bottom: 2px solid #3C718A;
+	padding: 11px;
+	text-decoration: none;
+	color: #eee;
+	font-weight: 700;
+	font-size: 20px;
+	box-sizing: border-box;
+	text-shadow: -1px -1px 3px #105A57;
+}
+
+div.sign-in-options
+{
+	text-align:right;
+}
+
+span.sign-in-with-text
+{
+	line-height: 50px;
+	color:#555;
+	font-weight:600;
+}
+
+div.share-icon-div
+{
+	width: 14%;
+	height: 50px;
+	margin-left: 15px;
+	line-height: 50px;
+	float: right;
+	box-sizing: border-box;
+	vertical-align: middle;
+	text-align: center;
+	background-color: #ddd;
+	border: 1px solid #ccc;
+	border-radius:50%;
+}
+
+div.share-icon-div img
+{
+	width: 100%;
+	height: 100%;
+	border-radius:50%;
+}
+
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
+
+button#predict {
+    background-color: #708090; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+

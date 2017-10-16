@@ -1,0 +1,130 @@
+
+<!DOCTYPE HTML>
+<html>
+  <head>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+  <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 80%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  <body>
+  <!-- <div id="WorldMap"> -->
+      <div id="map"></div>
+    <script>
+
+      // This example displays a marker at the center of Australia.
+      // When the user clicks the marker, an info window opens.
+
+      function initMap(locationArray) {
+    	 /*  if(thickness == undefined && elevation == undefined){
+  			thickness = 100;
+  			elevation = 1000;
+  		} */
+  		
+  		if(locationArray != undefined)
+  		{
+  			var map = new google.maps.Map(document.getElementById('map'), {
+    	          zoom: 3,
+    	          center: {lat: 70, lng : -45}
+    	          //mapTypeId: 'satellite'
+    	        });
+  			
+  			for(var i=0;i<locationArray.length;i++)
+      	  {
+
+      	        var contentString = '<b>Thickness : </b>&nbsp;'+locationArray[i].thickness;
+
+      	        var iconPath = "";
+      	        if(locationArray[i].thickness <= 500)
+      	        	iconPath = "mark_1.png";
+      	        else if(locationArray[i].thickness >= 2000)
+      	        	iconPath = "mark_3.png";
+      	        else
+      	        	iconPath = "mark_2.png";
+      	        
+      	        var iconbase = {
+      	        		url : iconPath,
+      	        		scaledSize: new google.maps.Size(25, 25)
+      	        }
+
+      	        //var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+      	        
+      	       
+      	        	var infowindow = new google.maps.InfoWindow({
+            	          content: contentString
+            	        });
+      	        	var marker = new google.maps.Marker({
+            	          position: {lat: locationArray[i].lat, lng : locationArray[i].lng},
+            	          map: map,
+            	          title: 'GreenLand Coverage',
+            	          icon : iconbase
+            	        });
+            	        
+            	        //markerArray.push(marker);
+            	        marker.addListener('click', (function() {
+            	        	infowindow.open(map, marker);
+            	        }()));
+      	  }
+  		}
+    	  
+    	  
+        //var uluru = {lat: 75.76892, lng: -44.1491};
+        
+        
+      }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALCMVxJ28kp6CxoJuX0Nytuli-mf69LVc&callback=initMap"></script>
+   
+   <div id="slider">
+		2001<input type="range" name="timeline" id="time-line" value="2001" min="2001" max="2016" step="3" onchange="showVal(this.value)">2016   
+   </div>
+   <!-- </div> -->
+   
+   <script>
+		$(document).ready(function(){
+			//setInterval(function(){$(document).find('defs').next().children('g:eq(1)').hide();},100);
+			$("#time-line").trigger('change');
+		});  
+   </script>
+   <script>
+	function showVal(currVal){
+		
+		locationArray = [{lat: 75.76892, lng: -44.1491, thickness : 100, elevation : 1000},
+		                     {lat: 79.76892, lng: -43.1491, thickness : 2500, elevation : 600},
+		                     {lat: 72.76892, lng: -41.1491, thickness : 600, elevation : 300}];
+		
+		//initMap(80,800,locationArray);
+		
+		 switch(currVal)
+		{
+			case "2001" : initMap(locationArray);break;
+			
+			case "2004" : initMap(locationArray);break;
+			
+			case "2007" : initMap(locationArray);break;
+			
+			case "2010" : initMap(locationArray);break;
+			
+			case "2013" : initMap(locationArray);break;
+			
+			case "2016" : initMap(locationArray);break;
+			
+			default : break;
+		}
+	};
+	
+   </script>
+  </body>
+  </head>
+</html>

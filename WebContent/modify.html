@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>NASA - Ice Sheet Analytics</title>
+	<script type="text/javascript" src="scripts/jsonData.js"></script>
+	<script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="scripts/loader.js"></script>
+		<!-- <script type="text/javascript" src="scripts/script_2.js"></script> -->
+	
+	<link rel="stylesheet" type="text/css" href="styles/reset.css" />
+	<link rel="stylesheet" type="text/css" href="styles/style.css" />
+	<link rel="stylesheet" type="text/css" href="styles/jquery-ui.css" />
+	
+	<link rel="shortcut icon" href="images/nasa-icon.png" type="image/x-icon">
+</head>
+<body>
+	<div class="main-container">
+		<div class="header-area">
+			<div class="app-icon"></div>
+			<div class="title-container">
+				<p>ICE SHEET Predictive Analytics</p>
+			</div>
+		</div>
+		<div class="content-area">
+			<div class="login-register-tabbed-area">
+
+				<!-- Tabs Container -->
+				<ul class="tabs-container" id="tabs">
+					<li>
+						<a target="_self" href="index.html" data-content-ref="login" class="tab-login-link tab-link history">
+							<img src="images/icon-history-search.png">
+							<span>HISTORICAL DATA</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="history-info">&#9432;</span>
+						</a>
+					</li>
+					<li>
+						<a target="_self" href="predict.html" data-content-ref="register" class="tab-register-link tab-link predict">
+							<img src="images/icon-prediction.png">
+							<span>ICE SHEET PREDICTION</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="predict-info">&#9432;</span>
+						</a>
+					</li>
+					<li>
+						<a data-content-ref="attrcust" class="tab-register-link tab-link modify">
+							<img src="images/icon-customattr.png">
+							<span>MODIFY MODEL</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="model-info">&#9432;</span>
+						</a>
+					</li>
+				</ul>
+				
+				<!-- Content for Tabs -->
+				<div class="tabContent" id="login">
+					
+				</div>
+				<div class="tabContent" id="register">
+					
+				</div>
+				<div class="tabContent" id="attrcust">
+					
+					<div class="tab1-region tab-row">
+						<p class="label-text">Which parameter do you want to add ?</p>
+						<div class="temp-container">
+							<input id="param" name="param1" value=""/>
+						</div>
+					</div>
+					<div class="tab1-region tab-row">
+						<p class="label-text">How is it varying currently with respect to Sea Ice melting</p>
+						<div class="temp-container">
+							<select id="windSpeedLevel" class="ws-field">
+								<option disabled>--Select--</option>
+								<option value="10" selected>Increasing by 10%</option>
+								<option value="50">Increasing by 50%</option>
+								<option value="-10">Decreasing by 10%</option>
+								<option value="-50">Decreasing by 50%</option>
+							</select>
+						</div>
+					</div>
+					<div class="tab1-region tab-row">
+						<div class="temp-container">
+							<a href="_self" id="test">Add more parameters</a>
+						</div>
+					</div>
+					<div class="tab1-region tab-row">
+						<div class="temp-container">
+							<button id="predict" onclick="addtoPrediction()">Add to Prediction Tab</button>
+						</div>
+					</div>
+					 <div class="loader" style=""></div>
+					
+					
+				</div>
+				<div id="dialog" style="display: none" align = "center">
+    				<span></span>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="footer-area">
+		
+		</div> -->
+	</div>
+	
+</body>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALCMVxJ28kp6CxoJuX0Nytuli-mf69LVc&callback=initMap"></script>
+<script>
+		$(document).ready(function(){
+			//setInterval(function(){$(document).find('defs').next().children('g:eq(1)').hide();},100);
+			$("#time-line").trigger('change');
+			$("#dialog").dialog({
+			       modal: true,
+			       autoOpen: false,
+			       title: "Message",
+			       width: 400,
+			       height: 150
+			   });
+			
+			$("span#model-info").click(function () {
+			       $('#dialog').dialog('open');
+			       $("#dialog span").text("This section allows the user to add more parameters to analyze Ice Melting. ");
+			       $("button.ui-dialog-titlebar-close").css("margin-right","50px");
+			   });
+			
+			var firstTab = $('ul.tabs-container').find('a.modify');//:eq().first();
+			$('ul.tabs-container').find('a.predict').removeClass('selected');
+			firstTab.addClass('selected');
+			$('div.login-register-tabbed-area div#login').hide();
+			$('div.login-register-tabbed-area div#register').hide();
+			$('div.login-register-tabbed-area div#attrcust').show();
+			
+			
+			// Adjusting the Tab widths dynamically based on the number of list items in the tab UL.
+			var tabCount = $('ul.tabs-container').find('a.tab-link').length;
+			$('ul#tabs li').css({
+				"width":(100/tabCount)+"%"
+			});
+			
+			// On Click of tab, show respective contents.
+			/* $('#tabs a').click(function(){
+				var tabLink = $(this);
+				$('ul.tabs-container').find('a.predict').not(tabLink).removeClass('selected');
+				tabLink.addClass('selected');
+				$('div.tabContent').hide();
+				$('div.login-register-tabbed-area div[id="'+tabLink.data('content-ref')+'"]').show();				
+			}); */
+			
+			// Select Language.
+			$('select.lang-select-class').on('change', function(){
+				//alert($('select.lang-select-class option:selected').text());
+				console.log($('select.lang-select-class option:selected').text()+" Language selected.");
+				recognitionMain.lang = $('select.lang-select-class option:selected').val();
+			});
+			
+		});  
+		
+   </script>
+<script>
+		
+function addtoPrediction(){
+	$("button#predict").click(function () {
+	       $('#dialog').dialog('open');
+	       $("#dialog span").text("Still under Construction. ! ");
+	       $("button.ui-dialog-titlebar-close").css("margin-right","50px");
+	   });
+}
+  		
+	
+		
+		
+		
+	
+</script>
+</html>

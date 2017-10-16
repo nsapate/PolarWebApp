@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>NASA - Ice Sheet Analytics</title>
+	
+	<script type="text/javascript" src="scripts/jsonData.js"></script>
+	<script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="scripts/script.js"></script>
+	<script type="text/javascript" src="scripts/loader.js"></script>
+	<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALCMVxJ28kp6CxoJuX0Nytuli-mf69LVc&libraries=geometry"></script> -->
+	<script src="https://www.amcharts.com/lib/3/ammap.js"></script>
+	<script src="https://www.amcharts.com/lib/3/maps/js/worldLow.js"></script>
+	<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+	<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+	<script src="https://www.amcharts.com/lib/3/pie.js"></script>
+	<script src="https://www.amcharts.com/lib/3/ammap_amcharts_extension.js"></script>
+	
+	<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+	<style type="text/css">
+		#WorldMap {
+  			width: 100%;
+  			height: 500px;
+		}
+	</style>
+	
+	<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
+	<link rel="stylesheet" type="text/css" href="styles/reset.css" />
+	<link rel="stylesheet" type="text/css" href="styles/style.css" />
+	<link rel="stylesheet" type="text/css" href="styles/jquery-ui.css" />
+	
+	<link rel="shortcut icon" href="images/nasa-icon.png" type="image/x-icon">
+</head>
+<body>
+	<div class="main-container">
+		<div class="header-area">
+			<div class="app-icon"></div>
+			<div class="title-container">
+				<p>ICE SHEET Predictive Analytics</p>
+			</div>
+		</div>
+		<div class="content-area">
+			<div class="login-register-tabbed-area">
+
+				<!-- Tabs Container -->
+				<ul class="tabs-container" id="tabs">
+					<li>
+						<a data-content-ref="login" class="tab-login-link tab-link">
+							<img src="images/icon-history-search.png">
+							<span>HISTORICAL DATA</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="history-info" >&#9432;</span>
+						</a>
+					</li>
+					<li>
+						<a target="_self" href="predict.html" data-content-ref="register" class="tab-register-link tab-link">
+							<img src="images/icon-prediction.png">
+							<span>ICE SHEET PREDICTION</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="predict-info">&#9432;</span>
+						</a>
+					</li>
+					<li>
+						<a target="_self" href="modify.html" data-content-ref="attrcust" class="tab-register-link tab-link">
+							<img src="images/icon-customattr.png">
+							<span>MODIFY MODEL</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="model-info">&#9432;</span>
+						</a>
+					</li>
+				</ul>
+				
+				<!-- Content for Tabs -->
+				<div class="tabContent" id="login">
+					<div class="tab1-timeline tab-row">
+						<p class="label-text">TIMELINE</p>
+						<div class="timeline-scroller-container">
+							<p id="yearTextMin"></p>
+							<div id="slider-range" class="slider-range-field"></div>
+							<p id="yearTextMax"></p>
+						</div>
+					</div>
+					<!-- <div class="tab1-region tab-row"> -->
+						<!-- <p class="label-text">REGION</p> -->
+						<!-- <div class="region-container"> -->
+							<!-- <select id="region" class="region-field"> -->
+								<!-- <option disabled selected>Select Region</option> -->
+							<!-- </select> -->
+						<!-- </div> -->
+					<!-- </div> -->
+					<div class="tab1-map-area tab-row">
+						<p class="label-text">SPATIAL VISUALIZATION</p>
+						<div class="map-container">
+							<div id="WorldMap" class="tab1-world-map"></div>
+							<!-- <div class="toplevel"><canvas id="myCanvas" width="15" height="15" style="border:1px solid #d3d3d3;"></canvas>&nbsp;High Ice Density (2001)</div><br/>
+							<div class="toplevel2"><canvas id="myCanvas2" width="15" height="15" style="border:1px solid #d3d3d3;"></canvas>&nbsp;Low Ice Density (2016)</div> -->
+							<!-- <span class="popuptext" id="myPopup">A Simple Popup!</span> -->
+						</div>
+					</div>
+				</div>
+				<div class="tabContent" id="register">
+					
+				</div>
+				<div class="tabContent" id="attrcust">
+				
+				</div>
+			</div>
+			<div id="dialog" style="display: none" align = "center">
+    			<span></span>
+			</div>
+		</div>
+		<!-- <div class="footer-area">
+		
+		</div> -->
+	</div>
+</body>
+
+<script>
+	
+</script>
+</html>

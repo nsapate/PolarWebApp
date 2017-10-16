@@ -1,0 +1,106 @@
+a {
+  text-decoration: none;
+  color: blue;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+#locations ul,
+#locations li.continent {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline-table;
+  color: white;
+}
+
+#locations ul {
+  min-width: 986px;
+}
+
+#locations li.continent {
+  padding: 5px 23px;
+  background-color: black;
+  position: relative;
+}
+
+#locations ul.areas {
+  display: none;
+  position: absolute;
+  left: 0;
+  z-index: 100;
+}
+
+#locations ul.areas li {
+  padding: 5px 23px;
+  background-color: black;
+  width: 100%;
+}
+
+#locations ul.areas.on {
+  display: block;
+}
+
+#locations a {
+  text-decoration: none;
+  color: white;
+}
+
+#locations li:hover {
+  background-color: grey;
+}
+
+#locations ul.areas li:hover {
+  background-color: grey;
+}
+
+#locations li.selected,
+#locations ul.areas li.selected {
+  background-color: #CCCCCC;
+}
+
+#credits {
+  font-size: 12px;
+  margin-top: 25px;
+}
+
+#credits p {
+  margin: 0;
+}
+
+rect {
+	fill : red,
+	stroke : black
+}
+
+#gradient {
+	height : 20px;
+	width : 5px
+	background : blue
+	background: -webkit-linear-gradient(red, yellow); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(red, yellow); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(red, yellow); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(red, yellow); /* Standard syntax (must be last)
+}
+
+.foo {
+  float: left;
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+  border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.blue {
+  background: #13b4ff;
+}
+
+.purple {
+  background: #ab3fdd;
+}
+
+.wine {
+  background: #ae163e;
+}
